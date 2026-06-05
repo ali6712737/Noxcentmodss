@@ -8,7 +8,7 @@
 <style>
   :root {
     --bg:#050810; --card:#0b1120; --blue:#00b4ff; --cyan:#00e5ff;
-    --border:rgba(0,180,255,0.2); --text:#b5cbdc; --white:#e8f4ff; --green:#00e676; --danger:#ff3d3d;
+    --border:rgba(0,180,255,0.2); --text:#b5cbdc; --white:#e8f4ff; --green:#00e676;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); color:var(--text); font-family:'Rajdhani', sans-serif; line-height:1.9; }
@@ -36,7 +36,8 @@
   .article-body ul { margin-left:25px; margin-bottom:25px; color:#c8dff0; }
   .article-body li { margin-bottom:10px; font-size:1.05rem; }
 
-  .error-banner { background:rgba(255,61,61,0.1); border:1px solid rgba(255,61,61,0.3); color:var(--danger); padding:12px; border-radius:4px; font-family:'Share Tech Mono'; font-size:1rem; margin-bottom:15px; display:none; text-transform:uppercase; font-weight:bold; }
+  /* Hidden State for Bottom Terminal Box */
+  #secureTerminalBox { display: none; }
 
   #footerTerminal { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; border-top:2px dashed var(--border); background:rgba(0,180,255,0.01); padding:40px 20px; }
 </style>
@@ -130,12 +131,9 @@
   <!-- ADS SLOT 6 -->
   <div class="ad-slot" style="width:100%; max-width:728px; height:90px; margin-bottom:40px;">[ ADSENSE / ADSTERRA CODE HERE - BOTTOM HORIZONTAL 728x90 ]</div>
 
-  <div class="system-box" style="width:100%; max-width:550px;">
+  <!-- HARDWARE HARD BLOCK: STRICT HIDE UNTIL TRIGGERED -->
+  <div class="system-box" id="secureTerminalBox" style="width:100%; max-width:550px;">
     <h3 style="font-family:'Orbitron'; color:#fff; margin-bottom:12px;">Data Destination Terminal</h3>
-    
-    <!-- ERROR NOTIFICATION ACCESSIBLE BLOCK -->
-    <div class="error-banner" id="errorBlock">Error: Click 'Get Link' at the top first to continue!</div>
-    
     <p class="timer-label" id="bottomStatus" style="color:var(--text);">Scroll confirmation recorded. Ready to process final dynamic path handshake.</p>
     
     <button class="trigger-btn" id="getLinkFinalBtn" onclick="startBottomTimer()">Get Link</button>
@@ -149,7 +147,6 @@
 
 <script>
   let targetLink = "https://google.com"; // System Fallback URL
-  let isTopProcessDone = false; // Security Flag validation tracking
 
   // Dynamic Route Configuration from Admin Control Panel
   const urlParams = new URLSearchParams(window.location.search);
@@ -180,20 +177,22 @@
         clearInterval(interval);
         document.getElementById('topTimerDisplay').style.display = 'none';
         document.getElementById('downloadNowBtn').style.display = 'inline-block';
-        isTopProcessDone = true; // Flag unlocked!
       }
     }, 1000);
   }
 
   // PREMIUM SLOW SMOOTH MULTI-AD ZONE AUTO SCROLL LOGIC
   function triggerSlowScroll() {
+    // 1. Pehle strictly bottom container ko inject / display block karo screen par
+    document.getElementById('secureTerminalBox').style.display = "block";
+    
     document.getElementById('downloadNowBtn').textContent = "Scrolling Assets...";
     document.getElementById('downloadNowBtn').style.background = "#5a7a99";
     
     const destination = document.getElementById('footerTerminal').offsetTop;
     const startingPoint = window.pageYOffset;
     const distanceToScroll = destination - startingPoint;
-    const scrollDuration = 9000; // 9 Seconds smooth scroll
+    const scrollDuration = 9000; // 9 Seconds smooth slow scroll
     let startTime = null;
 
     function scrollAnimation(timestamp) {
@@ -216,24 +215,8 @@
     window.requestAnimationFrame(scrollAnimation);
   }
 
-  // BOTTOM ENGINE LOGIC: With strict security enforcement checks
+  // BOTTOM ENGINE LOGIC: Absolute execution after hardware injection
   function startBottomTimer() {
-    const errorBlock = document.getElementById('errorBlock');
-    
-    // STRICT SECURITY GATE: If top process hasn't completed successfully
-    if (!isTopProcessDone) {
-      errorBlock.style.display = "block"; // Show Error Banner
-      
-      // Auto Scroll smooth jump to top to hit the correct initial button
-      window.scrollTo({
-        top: document.getElementById('topControlBox').offsetTop - 100,
-        behavior: 'smooth'
-      });
-      return; // Absolute lock block break sequence execution
-    }
-
-    // If verification security passes successfully, execute regular terminal countdown
-    errorBlock.style.display = "none";
     document.getElementById('getLinkFinalBtn').style.display = 'none';
     document.getElementById('bottomTimerDisplay').style.display = 'block';
     document.getElementById('bottomStatus').textContent = "Executing final structural redirect mapping...";
