@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Noxcent Mods - Ultimate Gaming Analysis</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght=500;700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght=500;700;900&family=Rajdhani:wght=500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   :root {
     --bg:#050810; --card:#0b1120; --blue:#00b4ff; --cyan:#00e5ff;
@@ -47,9 +48,8 @@
 
 <div class="wrapper">
   <h1 class="article-title">PUBG Mobile vs Free Fire: The Ultimate Deep Analysis & Comparison Report</h1>
-  <span class="meta-info" id="dynamicTitleBadge">Active Node Request Status: Default Context Map</span>
+  <span class="meta-info" id="dynamicTitleBadge">Connecting to secure cloud node...</span>
   
-  <!-- TOP TIMER / SYSTEM INTERACTION BUTTON -->
   <div class="system-box" id="topControlBox">
     <button class="trigger-btn" id="getMasterBtn" onclick="startTopTimer()">Get Link</button>
     
@@ -61,10 +61,8 @@
     <button class="trigger-btn" id="downloadNowBtn" style="display:none; background:var(--green);" onclick="triggerSlowScroll()">Download Now</button>
   </div>
 
-  <!-- ADS SLOT 1 -->
   <div class="ad-slot">[ ADSENSE / ADSTERRA CODE HERE - TOP MAIN BANNER ]</div>
 
-  <!-- 3,000+ WORDS DETAILED MEGA ARTICLE BODY -->
   <div class="article-body">
     <p>The mobile battle royale landscape has been dominated by two absolute titans for years: PUBG Mobile (PlayerUnknown's Battlegrounds) and Garena Free Fire. Both games have amassed hundreds of millions of downloads, generated billions of dollars in player spending, and formed deep esports ecosystems globally. However, despite belonging to the exact same genre, their execution, target audience, core graphics architecture, mechanical pacing, and operational philosophies are completely distinct. This 3,000+ word deep-dive comparison serves to analyze every major layer separating these tactical survival simulators to determine once and for all which option provides the definitive battle royale experience.</p>
 
@@ -73,7 +71,6 @@
     
     <p>Conversely, Garena Free Fire leverages the Unity Engine framework. Unity is internationally praised for its extreme multi-platform stability, rapid build iteration capabilities, and lightweight runtime execution footprints. Garena strategically deployed Unity to optimize Free Fire for low-end to mid-range mobile processing chipsets. By avoiding heavy post-processing pipelines and ultra-dense draw distances, Free Fire ensures consistent 60 frames per second rendering targets on devices with minimal RAM capacities and aging system-on-chip architectures. This foundational engine optimization selection serves as the single greatest driver for Free Fire's overwhelming demographic dominance in emerging global mobile markets.</p>
 
-    <!-- ADS SLOT 2 -->
     <div class="ad-slot">[ ADSENSE / ADSTERRA CODE HERE - CONTENT PARAGRAPH AD BLOCK 1 ]</div>
 
     <h2>2. Visual Fidelity, Graphic Rendering, and Art Direction</h2>
@@ -87,7 +84,6 @@
       <li><strong>Free Fire Minimum:</strong> 1GB RAM minimum (2GB-3GB recommended), Android 4.1+, Snapdragon 400 series or basic MediaTek processors, with a highly optimized storage footprint of around 1.5GB to 2.5GB.</li>
     </ul>
 
-    <!-- ADS SLOT 3 -->
     <div class="ad-slot">[ ADSENSE / ADSTERRA CODE HERE - CONTENT PARAGRAPH AD BLOCK 2 ]</div>
 
     <h2>3. Core Gameplay Loop, Gunplay Physics, and Match Pacing</h2>
@@ -98,7 +94,6 @@
     <h2>4. The Gloo Wall Variable vs Tactical Realism</h2>
     <p>The single most defining proprietary gameplay mechanic inside Free Fire is the inclusion of "Gloo Walls." At any point during live tracking combat, a player can instant-deploy a massive, indestructible ice barrier directly in front of their vector coordinates to generate artificial cover in open terrain. This completely changes defensive strategies. If caught out in an open field in Free Fire, defensive reaction times and high-speed Gloo Wall layering can entirely save an exposed squad from a disadvantageous position.</p>
 
-    <!-- ADS SLOT 4 -->
     <div class="ad-slot">[ ADSENSE / ADSTERRA CODE HERE - MIDDLE LARGE IN-ARTICLE BOX ]</div>
 
     <p>PUBG Mobile features no such dynamic fantasy cover mechanisms. If you are caught rotating through an open wheat field without hard structural objects or natural undulating terrain dips, your survival relies strictly on smoke grenade walls, vehicular shielding strategies, or superior counter-firing precision. This lack of instant cover mechanics emphasizes macro-level positioning awareness, map navigation routes, and pre-emptive rotational planning over reactive reflex actions, cementing its reputation as a true hardcore simulation style battle royale.</p>
@@ -108,7 +103,6 @@
     
     <p>Free Fire alters this landscape by utilizing an extensive, highly intricate Character Skill System. Every character unlocked possesses a distinct, game-altering active or passive ability. Characters like Alok generate constant localized healing auras and acceleration boosts, while characters like Chrono build dome-shaped forcefields that absorb hundreds of points of kinetic damage. Players can link up to four distinct character skills simultaneously, forming tailored character builds. While this creates a deeply engaging strategy layer, it introduces heavy monetization disparities, as premium upgraded character builds and elite stat-boosting weapon skins can provide clear stat advantages over free-to-play participants.</p>
 
-    <!-- ADS SLOT 5 -->
     <div class="ad-slot">[ ADSENSE / ADSTERRA CODE HERE - PRE-FOOTER STRIP BANNER ]</div>
 
     <h2>6. Map Diversity, Scale, and Strategic Layout Configurations</h2>
@@ -123,32 +117,47 @@
   </div>
 </div>
 
-<!-- SECURED BOTTOM TERMINAL BAY -->
 <div id="footerTerminal">
-  <!-- ADS SLOT 6 -->
   <div class="ad-slot" style="width:100%; max-width:728px; height:90px; margin-bottom:40px;">[ ADSENSE / ADSTERRA CODE HERE - BOTTOM HORIZONTAL 728x90 ]</div>
-
-  <!-- NOTICE: THE BOX IS COMPLETELY GONE FROM HERE ON DEFAULT ENGINE LOAD -->
 </div>
 
 <script>
+  // === CONFIGURATION ===
+  const SUPABASE_URL = "https://jsfmfpfdkkrsnkdxxznm.supabase.co";
+  const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzZm1mcGZka2tyc25rZHh4em5tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MzE0NjksImV4cCI6MjA5NjIwNzQ2OX0.0-L6ujQWp8Y_daufdJYed-euiblDkvN-52CgDK6TXDE";
+  // =====================
+
+  const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   let targetLink = "https://google.com"; // System Fallback URL
 
-  // Dynamic Route Configuration from Admin Control Panel
   const urlParams = new URLSearchParams(window.location.search);
   const routeId = urlParams.get('id');
 
-  if(routeId) {
-    const database = JSON.parse(localStorage.getItem('noxcent_db') || '{}');
-    if(database[routeId]) {
-      targetLink = database[routeId].dest;
-      document.getElementById('dynamicTitleBadge').textContent = "Target Payload Linked: " + database[routeId].title;
+  async function fetchTargetLink() {
+    if(routeId) {
+      try {
+        let { data, error } = await _supabase
+          .from('noxcent_links')
+          .select('title, dest')
+          .eq('id', routeId)
+          .single();
+
+        if (data && !error) {
+          targetLink = data.dest;
+          document.getElementById('dynamicTitleBadge').textContent = "Target Payload Linked: " + data.title;
+        } else {
+          document.getElementById('dynamicTitleBadge').textContent = "System Mode: Standard Analysis Context Archive";
+        }
+      } catch (err) {
+        document.getElementById('dynamicTitleBadge').textContent = "System Mode: Archive View (Offline)";
+      }
     } else {
       document.getElementById('dynamicTitleBadge').textContent = "System Mode: Standard Analysis Context Archive";
     }
   }
 
-  // TOP ENGINE LOGIC: Get Link -> 15s Timer -> Download Now
+  fetchTargetLink();
+
   function startTopTimer() {
     document.getElementById('getMasterBtn').style.display = 'none';
     document.getElementById('topTimerDisplay').style.display = 'block';
@@ -167,12 +176,9 @@
     }, 1000);
   }
 
-  // PREMIUM SLOW SMOOTH MULTI-AD ZONE AUTO SCROLL LOGIC
   function triggerSlowScroll() {
-    // SECURITY FIX: Generate the HTML dynamically ONLY when they click "Download Now"
     const footer = document.getElementById('footerTerminal');
     
-    // Check if it already exists to prevent duplicate injection
     if(!document.getElementById('secureTerminalBox')) {
       const secureBoxHTML = `
         <div class="system-box" id="secureTerminalBox" style="width:100%; max-width:550px; margin-top:20px;">
@@ -194,7 +200,7 @@
     const destination = footer.offsetTop;
     const startingPoint = window.pageYOffset;
     const distanceToScroll = destination - startingPoint;
-    const scrollDuration = 9000; // 9 Seconds smooth slow scroll
+    const scrollDuration = 9000;
     let startTime = null;
 
     function scrollAnimation(timestamp) {
@@ -217,7 +223,6 @@
     window.requestAnimationFrame(scrollAnimation);
   }
 
-  // BOTTOM ENGINE LOGIC: Starts ONLY when button is generated and clicked
   function startBottomTimer() {
     document.getElementById('getLinkFinalBtn').style.display = 'none';
     document.getElementById('bottomTimerDisplay').style.display = 'block';
