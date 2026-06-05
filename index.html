@@ -29,8 +29,9 @@
   .trigger-btn { background:var(--blue); color:#000; font-family:'Orbitron'; font-weight:900; font-size:1.05rem; padding:15px 35px; border:none; border-radius:4px; cursor:pointer; text-transform:uppercase; display:inline-block; width:100%; max-width:350px; letter-spacing:1px; box-shadow:0 0 15px rgba(0,180,255,0.2); transition:0.2s; }
   .trigger-btn:hover { background:var(--cyan); }
 
-  .ad-slot { background:rgba(0,180,255,0.01); border:1px dashed rgba(0,180,255,0.15); height:280px; margin:40px 0; display:flex; align-items:center; justify-content:center; color:rgba(0,180,255,0.35); font-family:'Share Tech Mono'; font-size:0.85rem; border-radius:4px; text-transform:uppercase; letter-spacing:1px; }
-  
+  /* Ad slot wrapper - clean, no placeholder styling */
+  .ad-slot { margin:40px 0; display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:10px; }
+
   .article-body h2 { font-family:'Orbitron'; color:var(--white); font-size:1.5rem; margin:45px 0 20px 0; border-left:4px solid var(--blue); padding-left:12px; text-transform:uppercase; }
   .article-body h3 { font-family:'Orbitron'; color:var(--cyan); font-size:1.2rem; margin:30px 0 15px 0; }
   .article-body p { margin-bottom:22px; font-size:1.1rem; text-align:justify; color:#c8dff0; }
@@ -61,7 +62,35 @@
     <button class="trigger-btn" id="downloadNowBtn" style="display:none; background:var(--green);" onclick="triggerSlowScroll()">Download Now</button>
   </div>
 
-  <div class="ad-slot">[ ADSENSE / ADSTERRA CODE HERE - TOP MAIN BANNER ]</div>
+  <!-- TOP MAIN BANNER: 468x60 (Desktop) + 320x50 (Mobile) -->
+  <div class="ad-slot">
+    <!-- Desktop: 468x60 -->
+    <div class="ad-desktop">
+      <script>
+        atOptions = {
+          'key' : 'a6489d885ba3375c20a1eda6a4a74309',
+          'format' : 'iframe',
+          'height' : 60,
+          'width' : 468,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/a6489d885ba3375c20a1eda6a4a74309/invoke.js"></script>
+    </div>
+    <!-- Mobile: 320x50 -->
+    <div class="ad-mobile">
+      <script>
+        atOptions = {
+          'key' : 'ee01828bac038fa1aafc6324b918e58b',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/ee01828bac038fa1aafc6324b918e58b/invoke.js"></script>
+    </div>
+  </div>
 
   <div class="article-body">
     <p>The mobile battle royale landscape has been dominated by two absolute titans for years: PUBG Mobile (PlayerUnknown's Battlegrounds) and Garena Free Fire. Both games have amassed hundreds of millions of downloads, generated billions of dollars in player spending, and formed deep esports ecosystems globally. However, despite belonging to the exact same genre, their execution, target audience, core graphics architecture, mechanical pacing, and operational philosophies are completely distinct. This 3,000+ word deep-dive comparison serves to analyze every major layer separating these tactical survival simulators to determine once and for all which option provides the definitive battle royale experience.</p>
@@ -71,7 +100,19 @@
     
     <p>Conversely, Garena Free Fire leverages the Unity Engine framework. Unity is internationally praised for its extreme multi-platform stability, rapid build iteration capabilities, and lightweight runtime execution footprints. Garena strategically deployed Unity to optimize Free Fire for low-end to mid-range mobile processing chipsets. By avoiding heavy post-processing pipelines and ultra-dense draw distances, Free Fire ensures consistent 60 frames per second rendering targets on devices with minimal RAM capacities and aging system-on-chip architectures. This foundational engine optimization selection serves as the single greatest driver for Free Fire's overwhelming demographic dominance in emerging global mobile markets.</p>
 
-    <div class="ad-slot">[ ADSENSE / ADSTERRA CODE HERE - CONTENT PARAGRAPH AD BLOCK 1 ]</div>
+    <!-- CONTENT AD BLOCK 1: 300x250 -->
+    <div class="ad-slot">
+      <script>
+        atOptions = {
+          'key' : 'e1a218a328b3e9e9c446ef9f3aa2fcfc',
+          'format' : 'iframe',
+          'height' : 250,
+          'width' : 300,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/e1a218a328b3e9e9c446ef9f3aa2fcfc/invoke.js"></script>
+    </div>
 
     <h2>2. Visual Fidelity, Graphic Rendering, and Art Direction</h2>
     <p>When assessing visual delivery benchmarks, the aesthetic objectives of both games present a stark, unbridgeable contrast. PUBG Mobile focuses heavily on gritty military realism, environmental authenticity, and hardware-taxing rendering. The game features physically-based rendering (PBR) assets, highly responsive anti-aliasing matrices, volumetric lighting variables, and dynamic shadow generation mapping. Grass layouts render at extensive distances, giving tactical value to prone positioning. Character uniforms, plate carriers, tactical helmets, and firearm models are heavily based on actual real-world military specifications, ensuring an immersive simulation aesthetic.</p>
@@ -84,17 +125,44 @@
       <li><strong>Free Fire Minimum:</strong> 1GB RAM minimum (2GB-3GB recommended), Android 4.1+, Snapdragon 400 series or basic MediaTek processors, with a highly optimized storage footprint of around 1.5GB to 2.5GB.</li>
     </ul>
 
-    <div class="ad-slot">[ ADSENSE / ADSTERRA CODE HERE - CONTENT PARAGRAPH AD BLOCK 2 ]</div>
+    <!-- CONTENT AD BLOCK 2: 300x250 -->
+    <div class="ad-slot">
+      <script>
+        atOptions = {
+          'key' : 'e1a218a328b3e9e9c446ef9f3aa2fcfc',
+          'format' : 'iframe',
+          'height' : 250,
+          'width' : 300,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/e1a218a328b3e9e9c446ef9f3aa2fcfc/invoke.js"></script>
+    </div>
 
     <h2>3. Core Gameplay Loop, Gunplay Physics, and Match Pacing</h2>
     <p>While the baseline macro-loop remains identical—drop from an aircraft, secure loot equipment, navigate a shrinking safe zone grid, and eliminate all threats to achieve absolute victory—the micro-mechanics produce vastly unique gameplay cadences. PUBG Mobile maps accommodate up to 100 concurrent live connections per session. The pacing is deliberately calculated, methodological, and deeply tactical. Map travel takes extensive time, and encounters require structural positioning, smoke screen deployment, and calculated flanking patterns. The gunplay features intricate recoil pattern parameters, bullet velocity drop-offs, and weapon-specific damage multipliers that force players to master firing discipline over automated mechanics.</p>
     
-    <p>Free Fire accelerates this operational tempo exponentially. Dropping down onto smaller spatial map zones with only 50 players per instance, match timers are compressed down to a swift 10-12 minutes compared to PUBG Mobile’s 30-35 minute matches. Gunplay features a powerful, built-in standard Aim-Assist matrix that locks onto opposing player centers instantly when aiming down sights. This shifts the mechanical skill ceiling away from recoil adjustment control over to reflex-driven macro movements, close-quarters jump-shots, and structural barrier creation positioning speed.</p>
+    <p>Free Fire accelerates this operational tempo exponentially. Dropping down onto smaller spatial map zones with only 50 players per instance, match timers are compressed down to a swift 10-12 minutes compared to PUBG Mobile's 30-35 minute matches. Gunplay features a powerful, built-in standard Aim-Assist matrix that locks onto opposing player centers instantly when aiming down sights. This shifts the mechanical skill ceiling away from recoil adjustment control over to reflex-driven macro movements, close-quarters jump-shots, and structural barrier creation positioning speed.</p>
 
     <h2>4. The Gloo Wall Variable vs Tactical Realism</h2>
     <p>The single most defining proprietary gameplay mechanic inside Free Fire is the inclusion of "Gloo Walls." At any point during live tracking combat, a player can instant-deploy a massive, indestructible ice barrier directly in front of their vector coordinates to generate artificial cover in open terrain. This completely changes defensive strategies. If caught out in an open field in Free Fire, defensive reaction times and high-speed Gloo Wall layering can entirely save an exposed squad from a disadvantageous position.</p>
 
-    <div class="ad-slot">[ ADSENSE / ADSTERRA CODE HERE - MIDDLE LARGE IN-ARTICLE BOX ]</div>
+    <!-- MIDDLE LARGE AD: 160x600 Vertical + Native Banner -->
+    <div class="ad-slot" style="flex-direction:column; align-items:center; gap:20px;">
+      <script>
+        atOptions = {
+          'key' : '21cb6b39aed71c09d24d40c6567f1d58',
+          'format' : 'iframe',
+          'height' : 600,
+          'width' : 160,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/21cb6b39aed71c09d24d40c6567f1d58/invoke.js"></script>
+      <!-- Native Banner -->
+      <script async="async" data-cfasync="false" src="https://pl29644223.effectivecpmnetwork.com/6fa6401f7378b372c2b3090530be58c9/invoke.js"></script>
+      <div id="container-6fa6401f7378b372c2b3090530be58c9"></div>
+    </div>
 
     <p>PUBG Mobile features no such dynamic fantasy cover mechanisms. If you are caught rotating through an open wheat field without hard structural objects or natural undulating terrain dips, your survival relies strictly on smoke grenade walls, vehicular shielding strategies, or superior counter-firing precision. This lack of instant cover mechanics emphasizes macro-level positioning awareness, map navigation routes, and pre-emptive rotational planning over reactive reflex actions, cementing its reputation as a true hardcore simulation style battle royale.</p>
 
@@ -103,7 +171,19 @@
     
     <p>Free Fire alters this landscape by utilizing an extensive, highly intricate Character Skill System. Every character unlocked possesses a distinct, game-altering active or passive ability. Characters like Alok generate constant localized healing auras and acceleration boosts, while characters like Chrono build dome-shaped forcefields that absorb hundreds of points of kinetic damage. Players can link up to four distinct character skills simultaneously, forming tailored character builds. While this creates a deeply engaging strategy layer, it introduces heavy monetization disparities, as premium upgraded character builds and elite stat-boosting weapon skins can provide clear stat advantages over free-to-play participants.</p>
 
-    <div class="ad-slot">[ ADSENSE / ADSTERRA CODE HERE - PRE-FOOTER STRIP BANNER ]</div>
+    <!-- PRE-FOOTER STRIP: 160x300 -->
+    <div class="ad-slot">
+      <script>
+        atOptions = {
+          'key' : '7027e43b75e7cbeff33a41bb4afc5771',
+          'format' : 'iframe',
+          'height' : 300,
+          'width' : 160,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/7027e43b75e7cbeff33a41bb4afc5771/invoke.js"></script>
+    </div>
 
     <h2>6. Map Diversity, Scale, and Strategic Layout Configurations</h2>
     <p>The structural scale of available playing arenas heavily reflects the overarching design intentions of both development pipelines. PUBG Mobile boasts legendary battlegrounds like Erangel, Miramar, Sanhok, Vikendi, and Livik. Miramar alone spans an staggering 8x8 kilometer desert layout, filled with hundreds of thousands of unique geometry assets, complexes, and high-ground mountain nests. These vast geographic scale variables demand proper vehicular management, navigation planning, and deep situational understanding of compound defense options.</p>
@@ -118,7 +198,19 @@
 </div>
 
 <div id="footerTerminal">
-  <div class="ad-slot" style="width:100%; max-width:728px; height:90px; margin-bottom:40px;">[ ADSENSE / ADSTERRA CODE HERE - BOTTOM HORIZONTAL 728x90 ]</div>
+  <!-- BOTTOM HORIZONTAL: 728x90 -->
+  <div class="ad-slot" style="width:100%; max-width:728px; margin-bottom:40px;">
+    <script>
+      atOptions = {
+        'key' : '19001b5ee237ef782458968e0059c8c2',
+        'format' : 'iframe',
+        'height' : 90,
+        'width' : 728,
+        'params' : {}
+      };
+    </script>
+    <script src="https://www.highperformanceformat.com/19001b5ee237ef782458968e0059c8c2/invoke.js"></script>
+  </div>
 </div>
 
 <script>
