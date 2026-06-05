@@ -13,7 +13,7 @@
     --green: #00e676; --danger: #ff3d3d; --border: rgba(0,180,255,0.2);
   }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--black); color:var(--text); font-family:'Rajdhani', sans-serif; padding:40px 20px; }
+  body { background:var(--black); color:var(--text); font-family:'Rajdhani', sans-serif; padding:40px 20px; min-height:100vh; }
   .admin-box { max-width:700px; margin:0 auto; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:30px; box-shadow:0 0 30px rgba(0,0,0,0.5); }
   h2 { font-family:'Orbitron'; color:var(--white); text-transform:uppercase; margin-bottom:20px; font-weight:700; font-size:1.6rem; text-align:center; }
   .form-group { margin-bottom:20px; }
@@ -22,54 +22,137 @@
   input:focus { border-color:var(--cyan); outline:none; }
   .submit-btn { background:var(--blue); color:#000; font-family:'Orbitron'; font-weight:900; width:100%; padding:14px; border:none; border-radius:4px; cursor:pointer; text-transform:uppercase; font-size:1rem; letter-spacing:1px; transition:0.2s; }
   .submit-btn:hover { background:var(--cyan); }
-  
-  .links-list { margin-top:40px; border-top:1px dashed var(--border); padding-top:30px; }
-  h3 { font-family:'Orbitron'; color:var(--cyan); text-transform:uppercase; font-size:1.2rem; margin-bottom:20px; }
-  .link-item { background:var(--dark); border:1px solid rgba(0,180,255,0.1); padding:15px; border-radius:4px; margin-bottom:15px; display:flex; justify-content:between; align-items:center; }
-  .link-info { flex-grow:1; }
-  .link-info h4 { color:var(--white); font-size:1.2rem; margin-bottom:5px; }
-  .link-info p { font-size:0.95rem; color:#8cb2d4; margin-bottom:3px; }
-  .del-btn { background:rgba(255,61,61,0.1); border:1px solid var(--danger); color:var(--danger); font-family:'Share Tech Mono'; font-weight:bold; padding:8px 15px; border-radius:4px; cursor:pointer; text-transform:uppercase; transition:0.2s; height:fit-content; }
+  .danger-btn { background:rgba(255,61,61,0.1); border:1px solid var(--danger); color:var(--danger); font-family:'Orbitron'; font-weight:700; width:100%; padding:10px; border:none; border-radius:4px; cursor:pointer; text-transform:uppercase; font-size:0.85rem; margin-top:10px; transition:0.2s; }
+  .danger-btn:hover { background:var(--danger); color:#000; }
+
+  /* LOGIN SCREEN */
+  #loginScreen { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:60vh; }
+  #loginScreen h2 { margin-bottom:30px; }
+  .login-box { width:100%; max-width:380px; }
+  .error-msg { color:var(--danger); font-family:'Share Tech Mono'; font-size:0.9rem; margin-top:10px; text-align:center; display:none; }
+
+  /* DASHBOARD */
+  #dashboard { display:none; }
+  .top-bar { display:flex; justify-content:space-between; align-items:center; margin-bottom:25px; flex-wrap:wrap; gap:10px; }
+  .logout-btn { background:rgba(255,61,61,0.1); border:1px solid var(--danger); color:var(--danger); font-family:'Share Tech Mono'; padding:8px 18px; border-radius:4px; cursor:pointer; font-size:0.9rem; transition:0.2s; }
+  .logout-btn:hover { background:var(--danger); color:#000; }
+
+  .links-list { margin-top:35px; border-top:1px dashed var(--border); padding-top:25px; }
+  h3 { font-family:'Orbitron'; color:var(--cyan); text-transform:uppercase; font-size:1.1rem; margin-bottom:18px; }
+  .link-item { background:var(--dark); border:1px solid rgba(0,180,255,0.1); padding:15px; border-radius:4px; margin-bottom:15px; display:flex; justify-content:space-between; align-items:center; gap:15px; }
+  .link-info { flex-grow:1; min-width:0; }
+  .link-info h4 { color:var(--white); font-size:1.1rem; margin-bottom:5px; }
+  .link-info p { font-size:0.9rem; color:#8cb2d4; margin-bottom:3px; word-break:break-all; }
+  .copy-btn { background:rgba(0,180,255,0.1); border:1px solid var(--blue); color:var(--blue); font-family:'Share Tech Mono'; padding:6px 12px; border-radius:4px; cursor:pointer; font-size:0.8rem; white-space:nowrap; transition:0.2s; margin-bottom:5px; display:block; }
+  .copy-btn:hover { background:var(--blue); color:#000; }
+  .del-btn { background:rgba(255,61,61,0.1); border:1px solid var(--danger); color:var(--danger); font-family:'Share Tech Mono'; font-weight:bold; padding:8px 15px; border-radius:4px; cursor:pointer; text-transform:uppercase; transition:0.2s; white-space:nowrap; }
   .del-btn:hover { background:var(--danger); color:#000; }
+  .status-msg { font-family:'Share Tech Mono'; font-size:0.9rem; padding:10px; border-radius:4px; margin-top:10px; text-align:center; display:none; }
+  .status-ok { background:rgba(0,230,118,0.1); border:1px solid var(--green); color:var(--green); }
+  .status-err { background:rgba(255,61,61,0.1); border:1px solid var(--danger); color:var(--danger); }
 </style>
 </head>
 <body>
 
-<div class="admin-box">
-  <h2>Noxcent Cloud Link Manager</h2>
-  
+<!-- ===== LOGIN SCREEN ===== -->
+<div class="admin-box" id="loginScreen">
+  <h2>🔐 Admin Login</h2>
+  <div class="login-box">
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" id="loginUser" placeholder="Enter username" autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="loginPass" placeholder="Enter password" onkeydown="if(event.key==='Enter') doLogin()">
+    </div>
+    <button class="submit-btn" onclick="doLogin()">Access Admin Panel</button>
+    <p class="error-msg" id="loginError">❌ Invalid credentials. Access denied.</p>
+  </div>
+</div>
+
+<!-- ===== DASHBOARD ===== -->
+<div class="admin-box" id="dashboard">
+  <div class="top-bar">
+    <h2 style="margin-bottom:0; font-size:1.3rem;">☁️ Cloud Link Manager</h2>
+    <button class="logout-btn" onclick="doLogout()">Logout</button>
+  </div>
+
   <div class="form-group">
     <label>Custom Link ID (e.g., pubgmod1)</label>
     <input type="text" id="articleId" placeholder="Enter unique custom id">
   </div>
-  
   <div class="form-group">
     <label>File Title / Badge Text</label>
     <input type="text" id="articleTitle" placeholder="e.g., PUBG Mobile VIP Mod v2.9">
   </div>
-  
   <div class="form-group">
     <label>Destination Target URL</label>
     <input type="url" id="destUrl" placeholder="https://mediafire.com/file-download-link">
   </div>
-  
-  <button class="submit-btn" onclick="createCloudLink()">Generate Cloud Link</button>
-  
+  <button class="submit-btn" onclick="createCloudLink()">⚡ Generate Cloud Link</button>
+  <div class="status-msg" id="statusMsg"></div>
+
   <div class="links-list">
-    <h3>Active Cloud Links Database</h3>
-    <div id="linksContainer">Loading links from secure node...</div>
+    <h3>Active Cloud Links</h3>
+    <div id="linksContainer"><p style="font-family:'Share Tech Mono'; color:var(--blue);">Loading from secure node...</p></div>
   </div>
 </div>
 
 <script>
-  // === CONFIGURATION ===
+  // ========== CONFIG ==========
   const SUPABASE_URL = "https://jsfmfpfdkkrsnkdxxznm.supabase.co";
   const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzZm1mcGZka2tyc25rZHh4em5tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MzE0NjksImV4cCI6MjA5NjIwNzQ2OX0.0-L6ujQWp8Y_daufdJYed-euiblDkvN-52CgDK6TXDE";
-  // =====================
+
+  // 🔐 APNA USERNAME AUR PASSWORD YAHAN BADLO
+  const ADMIN_USER = "noxcent";
+  const ADMIN_PASS = "noxcent@2025";
+  // ============================
 
   const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  // Load active cloud links automatically
+  // Check agar pehle se logged in hai
+  window.onload = function() {
+    if(sessionStorage.getItem('noxcent_admin') === 'true') {
+      showDashboard();
+    }
+  };
+
+  function doLogin() {
+    const u = document.getElementById('loginUser').value.trim();
+    const p = document.getElementById('loginPass').value.trim();
+    if(u === ADMIN_USER && p === ADMIN_PASS) {
+      sessionStorage.setItem('noxcent_admin', 'true');
+      document.getElementById('loginError').style.display = 'none';
+      showDashboard();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+      document.getElementById('loginPass').value = '';
+    }
+  }
+
+  function showDashboard() {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    loadLinks();
+  }
+
+  function doLogout() {
+    sessionStorage.removeItem('noxcent_admin');
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('loginUser').value = '';
+    document.getElementById('loginPass').value = '';
+  }
+
+  function showStatus(msg, isOk) {
+    const el = document.getElementById('statusMsg');
+    el.textContent = msg;
+    el.className = 'status-msg ' + (isOk ? 'status-ok' : 'status-err');
+    el.style.display = 'block';
+    setTimeout(() => el.style.display = 'none', 3500);
+  }
+
   async function loadLinks() {
     const container = document.getElementById('linksContainer');
     try {
@@ -80,83 +163,71 @@
 
       if (error) throw error;
 
-      if(data.length === 0) {
-        container.innerHTML = `<p style="color:var(--muted); font-family:'Share Tech Mono';">No links available in cloud database.</p>`;
+      if(!data || data.length === 0) {
+        container.innerHTML = `<p style="color:#5a7a99; font-family:'Share Tech Mono';">No links in database yet.</p>`;
         return;
       }
 
       container.innerHTML = '';
       data.forEach(link => {
-        // Base landing page URL dynamically track karna
-        const currentDomain = window.location.origin + window.location.pathname.replace('admin.html', 'index.html');
-        const shortUrl = `${currentDomain}?id=${link.id}`;
-
+        const base = window.location.origin + window.location.pathname.replace('admin.html','index.html');
+        const shortUrl = `${base}?id=${link.id}`;
         container.innerHTML += `
-          <div class="link-item" style="display:flex; justify-content:space-between; align-items:center; gap:20px;">
+          <div class="link-item">
             <div class="link-info">
-              <h4>${link.title} <span style="color:var(--cyan); font-size:0.9rem;">(ID: ${link.id})</span></h4>
-              <p>Short Link: <a href="${shortUrl}" target="_blank" style="color:var(--blue); word-break:break-all;">${shortUrl}</a></p>
-              <p>Destination: <span style="color:#5a7a99; word-break:break-all;">${link.dest}</span></p>
+              <h4>${link.title} <span style="color:var(--cyan); font-size:0.85rem;">(${link.id})</span></h4>
+              <p>🔗 <a href="${shortUrl}" target="_blank" style="color:var(--blue);">${shortUrl}</a></p>
+              <p>📍 <span style="color:#5a7a99;">${link.dest}</span></p>
+              <button class="copy-btn" onclick="copyLink('${shortUrl}')">📋 Copy Link</button>
             </div>
             <button class="del-btn" onclick="deleteCloudLink('${link.id}')">Delete</button>
           </div>`;
       });
     } catch (err) {
-      container.innerHTML = `<p style="color:var(--danger)">Error loading data: ${err.message}</p>`;
+      container.innerHTML = `<p style="color:var(--danger)">Error: ${err.message}</p>`;
     }
   }
 
-  // Insert link into Supabase Cloud
+  function copyLink(url) {
+    navigator.clipboard.writeText(url).then(() => showStatus('✅ Link copied to clipboard!', true));
+  }
+
   async function createCloudLink() {
-    const id = document.getElementById('articleId').value.trim().toLowerCase();
+    const id = document.getElementById('articleId').value.trim().toLowerCase().replace(/\s+/g,'-');
     const title = document.getElementById('articleTitle').value.trim();
     const dest = document.getElementById('destUrl').value.trim();
 
-    if(!id || !title || !dest) return alert('Bhai saare fields lazmi fill karo!');
+    if(!id || !title || !dest) { showStatus('❌ Saare fields fill karo!', false); return; }
+    if(!dest.startsWith('http')) { showStatus('❌ Valid URL daalo (https://...)', false); return; }
 
     try {
-      const { error } = await _supabase
-        .from('noxcent_links')
-        .insert([{ id, title, dest }]);
-
+      const { error } = await _supabase.from('noxcent_links').insert([{ id, title, dest }]);
       if(error) {
-        if(error.code === '23505') {
-          alert('Yeh ID pehle se use ho rahi hai! Kuch naya naam rakho.');
-        } else {
-          throw error;
-        }
+        if(error.code === '23505') showStatus('❌ Yeh ID pehle se use ho rahi hai!', false);
+        else throw error;
       } else {
-        alert('Mubarak ho! Link cloud main successfully save ho gaya.');
+        showStatus('✅ Link successfully generate ho gaya!', true);
         document.getElementById('articleId').value = '';
         document.getElementById('articleTitle').value = '';
         document.getElementById('destUrl').value = '';
         loadLinks();
       }
     } catch (err) {
-      alert('Error creating link: ' + err.message);
+      showStatus('❌ Error: ' + err.message, false);
     }
   }
 
-  // Delete link from Supabase Cloud
   async function deleteCloudLink(id) {
-    if(confirm('Kya aap sach mein yeh link database se delete karna chahte hain?')) {
-      try {
-        const { error } = await _supabase
-          .from('noxcent_links')
-          .delete()
-          .eq('id', id);
-
-        if(error) throw error;
-        alert('Link successfully wiped out from database!');
-        loadLinks();
-      } catch (err) {
-        alert('Error deleting link: ' + err.message);
-      }
+    if(!confirm('Kya sach mein delete karna hai yeh link?')) return;
+    try {
+      const { error } = await _supabase.from('noxcent_links').delete().eq('id', id);
+      if(error) throw error;
+      showStatus('🗑️ Link deleted!', true);
+      loadLinks();
+    } catch (err) {
+      showStatus('❌ Error: ' + err.message, false);
     }
   }
-
-  // Run on page load
-  loadLinks();
 </script>
 </body>
 </html>
