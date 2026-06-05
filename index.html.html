@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noxcent Mods - Gaming Mods & Downloads</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #050810; --dark: #080d1a; --card: #0b1120;
+    --blue: #00b4ff; --blue2: #0077cc; --white: #e8f4ff; --muted: #5a7a99;
+    --border: rgba(0,180,255,0.2); --border2: rgba(0,180,255,0.08);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background: var(--black); color: var(--white); font-family: 'Rajdhani', sans-serif; }
+  header { background: rgba(5,8,16,0.97); border-bottom: 1px solid var(--border); padding: 20px; text-align: center; }
+  .logo-name { font-family: 'Orbitron', monospace; font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; }
+  .logo-name span { color: var(--blue); }
+  
+  .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+  .sec-title { font-family: 'Orbitron', monospace; color: var(--blue); margin-bottom: 20px; text-transform: uppercase; }
+  .article-card { background: var(--card); border: 1px solid var(--border2); padding: 25px; border-radius: 6px; margin-bottom: 20px; cursor: pointer; transition: 0.2s; }
+  .article-card:hover { border-color: var(--blue); }
+  .art-title { font-family: 'Orbitron', monospace; font-size: 1.2rem; margin-bottom: 10px; }
+  .art-desc { color: var(--muted); font-size: 0.95rem; }
+  footer { background: #030507; text-align: center; padding: 30px; margin-top: 60px; border-top: 1px solid var(--border); color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-name">NOXCENT<span> MODS</span></div>
+</header>
+
+<div class="container">
+  <h2 class="sec-title">Latest Articles</h2>
+  <div id="articlesContainer"></div>
+</div>
+
+<footer>
+  <p>&copy; 2026 Noxcent Mods. All Rights Reserved.</p>
+</footer>
+
+<script>
+  const defaultArticles = [
+    { id: 'gta6', title: 'GTA 6 Ultra Graphics Mod Pack v1.2', desc: 'Download the latest next-gen ultra graphic optimization patch for GTA 6 PC version.' },
+    { id: 'cyberpunk', title: 'Cyberpunk 2077 Unlimited Money & XP Cheat', desc: 'Get the latest working engine save script injector to maximize all attributes safely.' }
+  ];
+
+  const savedLinks = JSON.parse(localStorage.getItem('shortlinks') || '{}');
+  const container = document.getElementById('articlesContainer');
+
+  if (Object.keys(savedLinks).length > 0) {
+    for (let id in savedLinks) {
+      container.innerHTML += `
+        <div class="article-card" onclick="window.location.href='redirect.html?id=${id}'">
+          <h3 class="art-title" style="color:var(--blue);">${savedLinks[id].title}</h3>
+          <p class="art-desc">Click here to read the full article description and download file assets safely.</p>
+        </div>`;
+    }
+  } else {
+    defaultArticles.forEach(art => {
+      container.innerHTML += `
+        <div class="article-card" onclick="alert('Admin needs to configure this link in the panel first!')">
+          <h3 class="art-title">${art.title}</h3>
+          <p class="art-desc">${art.desc}</p>
+        </div>`;
+    });
+  }
+</script>
+</body>
+</html>
