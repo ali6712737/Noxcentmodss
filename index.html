@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Noxcent Mods - Ultimate Gaming Analysis</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght=500;700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg:#050810; --card:#0b1120; --blue:#00b4ff; --cyan:#00e5ff;
@@ -35,9 +35,6 @@
   .article-body p { margin-bottom:22px; font-size:1.1rem; text-align:justify; color:#c8dff0; }
   .article-body ul { margin-left:25px; margin-bottom:25px; color:#c8dff0; }
   .article-body li { margin-bottom:10px; font-size:1.05rem; }
-
-  /* Hidden State for Bottom Terminal Box */
-  #secureTerminalBox { display: none; }
 
   #footerTerminal { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; border-top:2px dashed var(--border); background:rgba(0,180,255,0.01); padding:40px 20px; }
 </style>
@@ -131,18 +128,7 @@
   <!-- ADS SLOT 6 -->
   <div class="ad-slot" style="width:100%; max-width:728px; height:90px; margin-bottom:40px;">[ ADSENSE / ADSTERRA CODE HERE - BOTTOM HORIZONTAL 728x90 ]</div>
 
-  <!-- HARDWARE HARD BLOCK: STRICT HIDE UNTIL TRIGGERED -->
-  <div class="system-box" id="secureTerminalBox" style="width:100%; max-width:550px;">
-    <h3 style="font-family:'Orbitron'; color:#fff; margin-bottom:12px;">Data Destination Terminal</h3>
-    <p class="timer-label" id="bottomStatus" style="color:var(--text);">Scroll confirmation recorded. Ready to process final dynamic path handshake.</p>
-    
-    <button class="trigger-btn" id="getLinkFinalBtn" onclick="startBottomTimer()">Get Link</button>
-    
-    <div id="bottomTimerDisplay" style="display:none;">
-      <p class="timer-label">Constructing encrypted destination cloud tunnels...</p>
-      <span class="counter" id="bottomClock">15</span>
-    </div>
-  </div>
+  <!-- NOTICE: THE BOX IS COMPLETELY GONE FROM HERE ON DEFAULT ENGINE LOAD -->
 </div>
 
 <script>
@@ -183,13 +169,29 @@
 
   // PREMIUM SLOW SMOOTH MULTI-AD ZONE AUTO SCROLL LOGIC
   function triggerSlowScroll() {
-    // 1. Pehle strictly bottom container ko inject / display block karo screen par
-    document.getElementById('secureTerminalBox').style.display = "block";
+    // SECURITY FIX: Generate the HTML dynamically ONLY when they click "Download Now"
+    const footer = document.getElementById('footerTerminal');
+    
+    // Check if it already exists to prevent duplicate injection
+    if(!document.getElementById('secureTerminalBox')) {
+      const secureBoxHTML = `
+        <div class="system-box" id="secureTerminalBox" style="width:100%; max-width:550px; margin-top:20px;">
+          <h3 style="font-family:'Orbitron'; color:#fff; margin-bottom:12px;">Data Destination Terminal</h3>
+          <p class="timer-label" id="bottomStatus" style="color:var(--text);">Scroll confirmation recorded. Ready to process final dynamic path handshake.</p>
+          <button class="trigger-btn" id="getLinkFinalBtn" onclick="startBottomTimer()">Get Link</button>
+          <div id="bottomTimerDisplay" style="display:none;">
+            <p class="timer-label">Constructing encrypted destination cloud tunnels...</p>
+            <span class="counter" id="bottomClock">15</span>
+          </div>
+        </div>
+      `;
+      footer.insertAdjacentHTML('beforeend', secureBoxHTML);
+    }
     
     document.getElementById('downloadNowBtn').textContent = "Scrolling Assets...";
     document.getElementById('downloadNowBtn').style.background = "#5a7a99";
     
-    const destination = document.getElementById('footerTerminal').offsetTop;
+    const destination = footer.offsetTop;
     const startingPoint = window.pageYOffset;
     const distanceToScroll = destination - startingPoint;
     const scrollDuration = 9000; // 9 Seconds smooth slow scroll
@@ -215,7 +217,7 @@
     window.requestAnimationFrame(scrollAnimation);
   }
 
-  // BOTTOM ENGINE LOGIC: Absolute execution after hardware injection
+  // BOTTOM ENGINE LOGIC: Starts ONLY when button is generated and clicked
   function startBottomTimer() {
     document.getElementById('getLinkFinalBtn').style.display = 'none';
     document.getElementById('bottomTimerDisplay').style.display = 'block';
