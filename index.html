@@ -4,444 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UnlockZone - Secure Link Terminal</title>
-    <!-- Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        :root {
-            --bg-dark: #0a0b10;
-            --panel-dark: #121420;
-            --accent-cyan: #00f2fe;
-            --accent-purple: #4facfe;
-            --text-main: #f1f5f9;
-            --text-muted: #64748b;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-x: hidden;
-            padding: 20px 10px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 680px;
-            background: var(--panel-dark);
-            border: 1px solid rgba(0, 242, 254, 0.1);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 10;
-        }
-
-        /* Smart Responsive Ad Slots */
-        .ad-slot {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 15px auto;
-            background: rgba(255,255,255,0.01);
-            border: 1px dashed rgba(255,255,255,0.03);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        /* Desktop Only Banners */
-        .desktop-ad { display: flex; }
-        /* Mobile Only Banners */
-        .mobile-ad { display: none; }
-
-        @media (max-width: 768px) {
-            .desktop-ad { display: none !important; }
-            .mobile-ad { display: flex !important; }
-        }
-
-        .ad-square { min-height: 250px; max-width: 300px; }
-        .ad-native { width: 100%; min-height: 150px; }
-
-        /* PC Skyscraper Sidebar Ads Settings */
-        .sidebar-ad-left {
-            position: fixed;
-            left: 20px;
-            top: 100px;
-            width: 160px;
-            height: 600px;
-            z-index: 5;
-        }
-        .sidebar-ad-right {
-            position: fixed;
-            right: 20px;
-            top: 100px;
-            width: 160px;
-            height: 600px;
-            z-index: 5;
-        }
-
-        @media (max-width: 1100px) {
-            .sidebar-ad-left, .sidebar-ad-right { display: none !important; }
-        }
-
-        .header-section {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-
-        .badge {
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
-            color: #000;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            display: inline-block;
-            margin-bottom: 12px;
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
-        }
-
-        h1 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(to right, #fff, var(--text-muted));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .content-box {
-            background: rgba(255,255,255,0.03);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 24px;
-            border-left: 4px solid var(--accent-cyan);
-        }
-
-        .content-box h2 {
-            font-size: 1.3rem;
-            color: var(--accent-cyan);
-            margin-bottom: 12px;
-        }
-
-        .content-box p {
-            color: #cbd5e1;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 12px;
-        }
-
-        .action-area {
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .btn {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            color: var(--text-muted);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 14px 32px;
-            font-size: 1rem;
-            font-weight: 700;
-            border-radius: 12px;
-            cursor: not-allowed;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 100%;
-            max-width: 320px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn.active {
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
-            color: #000;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
-        }
-
-        .btn.active:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 35px rgba(0, 242, 254, 0.6);
-        }
-
-        #timer {
-            font-family: monospace;
-            font-weight: bold;
-        }
-
-        .terminal-log {
-            font-family: monospace;
-            font-size: 0.8rem;
-            color: #10b981;
-            margin-top: 12px;
-            text-align: center;
-        }
-
-        #bottom-trigger {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-            margin-top: 30px;
-            display: none;
-        }
-
-        #bottom-trigger.show {
-            opacity: 1;
-            transform: translateY(0);
-            display: block;
-        }
+        :root { --bg-dark: #0a0b10; --panel-dark: #121420; --accent-cyan: #00f2fe; --accent-purple: #4facfe; --text-main: #f1f5f9; }
+        body { background-color: var(--bg-dark); color: var(--text-main); display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .container { width: 100%; max-width: 650px; background: var(--panel-dark); padding: 25px; border-radius: 12px; margin-bottom: 20px; text-align: center; border: 1px solid #334155; }
+        .ad-slot { margin: 15px 0; display: flex; justify-content: center; min-height: 50px; }
+        .sidebar { position: fixed; top: 100px; width: 160px; z-index: 100; }
+        .left { left: 10px; } .right { right: 10px; }
+        @media (max-width: 1200px) { .sidebar { display: none; } }
+        .btn { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); padding: 15px 30px; border-radius: 8px; font-weight: bold; cursor: pointer; border: none; width: 100%; max-width: 300px; margin-top: 15px; color: #000; }
+        .article { text-align: left; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid var(--accent-cyan); }
+        h2 { color: var(--accent-cyan); margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
-    <!-- ================= 1. FIXED PC SIDEBAR ADS ================= -->
-    <div class="sidebar-ad-left desktop-ad">
-        <script>
-            atOptions = {
-                'key' : '21cb6b39aed71c09d24d40c6567f1d58',
-                'format' : 'iframe',
-                'height' : 600,
-                'width' : 160,
-                'params' : {}
-            };
-        </script>
-        <script src="https://www.highperformanceformat.com/21cb6b39aed71c09d24d40c6567f1d58/invoke.js"></script>
-    </div>
+    <!-- SIDEBAR ADS -->
+    <div class="sidebar left"><script>atOptions = {'key' : '21cb6b39aed71c09d24d40c6567f1d58','format' : 'iframe','height' : 600,'width' : 160,'params' : {}};</script><script src="//www.highperformanceformat.com/21cb6b39aed71c09d24d40c6567f1d58/invoke.js"></script></div>
+    <div class="sidebar right"><script>atOptions = {'key' : '7027e43b75e7cbeff33a41bb4afc5771','format' : 'iframe','height' : 300,'width' : 160,'params' : {}};</script><script src="//www.highperformanceformat.com/7027e43b75e7cbeff33a41bb4afc5771/invoke.js"></script></div>
 
-    <div class="sidebar-ad-right desktop-ad">
-        <script>
-            atOptions = {
-                'key' : '7027e43b75e7cbeff33a41bb4afc5771',
-                'format' : 'iframe',
-                'height' : 300,
-                'width' : 160,
-                'params' : {}
-            };
-        </script>
-        <script src="https://www.highperformanceformat.com/7027e43b75e7cbeff33a41bb4afc5771/invoke.js"></script>
-    </div>
-
-
-    <!-- ================= 2. TOP MAIN BANNER (Adaptive) ================= -->
-    <div class="ad-slot desktop-ad" style="max-width:728px; min-height:90px;">
-        <script>
-            atOptions = {
-                'key' : '19001b5ee237ef782458968e0059c8c2',
-                'format' : 'iframe',
-                'height' : 90,
-                'width' : 728,
-                'params' : {}
-            };
-        </script>
-        <script src="https://www.highperformanceformat.com/19001b5ee237ef782458968e0059c8c2/invoke.js"></script>
-    </div>
-    <div class="ad-slot mobile-ad" style="max-width:468px; min-height:60px;">
-        <script>
-            atOptions = {
-                'key' : 'a6489d885ba3375c20a1eda6a4a74309',
-                'format' : 'iframe',
-                'height' : 60,
-                'width' : 468,
-                'params' : {}
-            };
-        </script>
-        <script src="https://www.highperformanceformat.com/a6489d885ba3375c20a1eda6a4a74309/invoke.js"></script>
-    </div>
-
-
-    <!-- MAIN WRAPPER CONTAINER -->
+    <!-- MAIN CONTAINER -->
     <div class="container">
-        <div class="header-section">
-            <div id="status-badge" class="badge">Syncing Gateway Token...</div>
-            <h1>Secure Link Terminal</h1>
+        <h1>Secure Link Terminal</h1>
+        
+        <!-- ARTICLE -->
+        <div class="article">
+            <h2>PUBG Mobile vs Free Fire: The Ultimate Battle Royale Showdown</h2>
+            <p>When it comes to mobile esports, PUBG Mobile and Free Fire are dominating the scene. PUBG Mobile focuses on realism, while Free Fire delivers fast-paced 50-player matches.</p>
         </div>
 
-        <!-- DYNAMIC ARTICLE CONTAINER (PUBG VS FREE FIRE WILL GENERATE HERE) -->
-        <div class="content-box" id="article-area">
-            <h2 id="article-title">Verifying Cloud Node...</h2>
-            <p id="article-p1">Establishing a dynamic gateway to destination assets. Please wait for authorization protocols...</p>
-            <p id="article-p2">Do not reload the buffer tunnel to keep encryption session keys active.</p>
-        </div>
+        <!-- SQUARE AD -->
+        <div class="ad-slot"><script>atOptions = {'key' : 'e1a218a328b3e9e9c446ef9f3aa2fcfc','format' : 'iframe','height' : 250,'width' : 300,'params' : {}};</script><script src="//www.highperformanceformat.com/e1a218a328b3e9e9c446ef9f3aa2fcfc/invoke.js"></script></div>
 
-        <!-- ================= 3. MID MAIN ARTICLE (300x250 Square) ================= -->
-        <div class="ad-slot ad-square">
-            <script>
-                atOptions = {
-                    'key' : 'e1a218a328b3e9e9c446ef9f3aa2fcfc',
-                    'format' : 'iframe',
-                    'height' : 250,
-                    'width' : 300,
-                    'params' : {}
-                };
-            </script>
-            <script src="https://www.highperformanceformat.com/e1a218a328b3e9e9c446ef9f3aa2fcfc/invoke.js"></script>
-        </div>
-
-        <div class="action-area">
-            <button id="mainBtn" class="btn" disabled>
-                Verifying Route (<span id="timer">15</span>s)
-            </button>
-            <div id="log-display" class="terminal-log">> Initializing handshakes...</div>
-        </div>
+        <button id="mainBtn" class="btn" disabled>Verifying (<span id="timer">15</span>s)</button>
     </div>
 
+    <!-- NATIVE AD -->
+    <div class="container"><div class="ad-slot"><script async src="https://pl29644223.effectivecpmnetwork.com/6fa6401f7378b372c2b3090530be58c9/invoke.js"></script></div></div>
 
-    <!-- ================= 4. MID-FOOTER ROW (Native Ads Layout) ================= -->
-    <div class="container" style="background:transparent; border:none; box-shadow:none; padding:0; margin-bottom:10px;">
-        <div class="ad-slot ad-native">
-            <script async="async" data-cfasync="false" src="https://pl29644223.effectivecpmnetwork.com/6fa6401f7378b372c2b3090530be58c9/invoke.js"></script>
-            <div id="container-6fa6401f7378b372c2b3090530be58c9"></div>
-        </div>
-    </div>
-
-
-    <!-- ================= 5. SECOND DYNAMIC BOTTOM PHASE ================= -->
-    <div id="bottom-trigger" class="container">
-        <div class="header-section" style="margin-bottom: 15px;">
-            <h2 style="font-size: 1.4rem; color: var(--accent-cyan);">Security Tunnel Ready</h2>
-            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 5px;">Click the final core route button below to unlock target payload.</p>
-        </div>
-
-        <div class="action-area" style="margin-top: 15px;">
-            <button id="finalBtn" class="btn active" style="max-width: 100%;">GET LINK</button>
-        </div>
-
-        <!-- ================= 6. BOTTOM TERMINAL BANNER (Adaptive) ================= -->
-        <div class="ad-slot desktop-ad" style="max-width:728px; min-height:90px; margin-top: 25px;">
-            <script>
-                atOptions = {
-                    'key' : '19001b5ee237ef782458968e0059c8c2',
-                    'format' : 'iframe',
-                    'height' : 90,
-                    'width' : 728,
-                    'params' : {}
-                };
-            </script>
-            <script src="https://www.highperformanceformat.com/19001b5ee237ef782458968e0059c8c2/invoke.js"></script>
-        </div>
-        <div class="ad-slot mobile-ad" style="max-width:320px; min-height:50px; margin-top: 25px;">
-            <script>
-                atOptions = {
-                    'key' : 'ee01828bac038fa1aafc6324b918e58b',
-                    'format' : 'iframe',
-                    'height' : 50,
-                    'width' : 320,
-                    'params' : {}
-                };
-            </script>
-            <script src="https://www.highperformanceformat.com/ee01828bac038fa1aafc6324b918e58b/invoke.js"></script>
-        </div>
+    <!-- GET LINK SECTION -->
+    <div id="bottom-trigger" class="container" style="display:none;">
+        <button id="finalBtn" class="btn">GET LINK</button>
     </div>
 
     <script>
-        // REPLACE WITH YOUR ACTUAL SUPABASE INITIALIZATION CREDENTIALS
-        const SUPABASE_URL = "https://your-supabase-url.supabase.co"; 
-        const SUPABASE_KEY = "your-anon-key";
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-        let targetUrl = "https://google.com"; // Fallback URL
-        const mainBtn = document.getElementById('mainBtn');
-        const timerElement = document.getElementById('timer');
-        const logDisplay = document.getElementById('log-display');
-        const statusBadge = document.getElementById('status-badge');
-        const bottomTrigger = document.getElementById('bottom-trigger');
-        const finalBtn = document.getElementById('finalBtn');
+        // Supabase initialize karne ke liye apni URL aur Key yahan dalen
+        const supabase = supabase.createClient("https://jsfmfpfdkkrsnkdxxznm.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzZm1mcGZka2tyc25rZHh4em5tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MzE0NjksImV4cCI6MjA5NjIwNzQ2OX0.0-L6ujQWp8Y_daufdJYed-euiblDkvN-52CgDK6TXDE");
         
-        const titleEl = document.getElementById('article-title');
-        const p1El = document.getElementById('article-p1');
-        const p2El = document.getElementById('article-p2');
+        let targetUrl = "https://google.com";
+        let timer = 15;
+        const mainBtn = document.getElementById('mainBtn');
+        const trigger = document.getElementById('bottom-trigger');
 
-        // Extract short ID from URL path
-        const pathId = window.location.pathname.split('/').pop();
-
-        // Dynamic Article content injector
-        function loadArticles() {
-            titleEl.innerText = "PUBG Mobile vs Free Fire: The Ultimate Battle Royale Showdown";
-            p1El.innerText = "When it comes to mobile esports, PUBG Mobile and Free Fire are dominating the scene. PUBG Mobile focuses on realism, heavy tactical gunplay, and high-end graphical setups requiring optimized hardware. On the flip side, Free Fire delivers fast-paced 50-player matches with special character abilities, perfect for quick gameplay loops on lower-spec mobile units.";
-            p2El.innerText = "Both titles have generated massive global configurations and custom mod distributions. Whether you prefer the raw tactical survival of Erangel or the fast ability-based action of Bermuda, ensure your dynamic pipeline is safe before launching custom data configurations.";
-        }
-
-        async function fetchRoute() {
-            loadArticles(); // Instantly inject the core gaming article content
-
-            if(!pathId || pathId === "" || pathId === "index.html") {
-                logDisplay.innerText = "> Standing by. No route ID requested.";
-                statusBadge.innerText = "No Target Token";
-                startTimer();
-                return;
+        const interval = setInterval(() => {
+            timer--;
+            document.getElementById('timer').innerText = timer;
+            if(timer <= 0) {
+                clearInterval(interval);
+                mainBtn.innerText = "DOWNLOAD NOW";
+                mainBtn.disabled = false;
+                mainBtn.onclick = () => { trigger.style.display = 'block'; window.scrollTo(0, document.body.scrollHeight); };
             }
+        }, 1000);
 
-            try {
-                let { data, error } = await supabase
-                    .from('noxcent_links')
-                    .select('target_url')
-                    .eq('short_id', pathId)
-                    .single();
-
-                if (error) throw error;
-
-                if(data && data.target_url) {
-                    targetUrl = data.target_url;
-                    statusBadge.innerText = "Target Payload Linked";
-                    logDisplay.innerText = "> Secure handshake authorized. Syncing database...";
-                }
-            } catch (err) {
-                console.error("> Routing Error:", err);
-                logDisplay.innerText = "> Routing error. Defaulting to fallback corridor.";
-                statusBadge.innerText = "Bypassing Filter";
-            }
-            startTimer();
-        }
-
-        function startTimer() {
-            let timeLeft = 15;
-            const interval = setInterval(() => {
-                timeLeft--;
-                timerElement.innerText = timeLeft;
-
-                if(timeLeft === 12) logDisplay.innerText = "> Injecting safety layers into payload route...";
-                if(timeLeft === 8) logDisplay.innerText = "> Clearing cookie tracking and scripts interference...";
-                if(timeLeft === 4) logDisplay.innerText = "> Finalizing destination corridor protocols...";
-
-                if(timeLeft <= 0) {
-                    clearInterval(interval);
-                    mainBtn.innerText = "DOWNLOAD NOW";
-                    mainBtn.classList.add('active');
-                    mainBtn.removeAttribute('disabled');
-                    logDisplay.innerText = "> Tunnel deployment ready. Click button.";
-                    logDisplay.style.color = "#00f2fe";
-                }
-            }, 1000);
-        }
-
-        mainBtn.addEventListener('click', () => {
-            if(mainBtn.classList.contains('active')) {
-                bottomTrigger.classList.add('show');
-                
-                window.scrollTo({
-                    top: document.body.scrollHeight,
-                    behavior: 'smooth'
-                });
-            }
-        });
-
-        finalBtn.addEventListener('click', () => {
-            window.location.href = targetUrl;
-        });
-
-        window.addEventListener('DOMContentLoaded', fetchRoute);
+        document.getElementById('finalBtn').onclick = () => window.location.href = targetUrl;
     </script>
 </body>
 </html>
